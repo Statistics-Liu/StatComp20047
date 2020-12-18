@@ -1,0 +1,60 @@
+---
+title: "StatComp20047"
+author: "Jianyu Liu"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Introduction to StatComp}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+## Overview
+
+__StatComp20047__ is a simple R package developed to make simple linear fitting for independent and dependent variables. Two functions are considered, namely, _Gradient_Descent _ (the running time of the algorithm is short, but it may fall into local minimum) and _Stochastic_GD_ (the running time of the algorithm may be longer, but the fitting effect is better). 
+
+## Introduction about _Gradient_Descent _
+
+The source R code is as follows:
+```{r}
+Gradient_Descent<-function(x,y,learning_rate){
+  x0=rep(1,length(x))
+  x_data=cbind(x0,x) 
+  y_data=matrix(y,length(y),1)
+  theta=matrix(c(1,1),2,1)
+  diff=x_data%*%theta-y_data 
+  gradient=(1/length(x))*(t(x_data)%*%diff)
+  while (!((abs(gradient[1,1])<0.0001)&(abs(gradient[2,1])<0.0001))) {
+    theta=theta-learning_rate*gradient
+    diff=x_data%*%theta-y_data 
+    gradient=(1/length(x))*(t(x_data)%*%diff)
+  }
+  func=paste('y=',theta[1,1],'+',theta[2,1],'x')
+  return (func)
+}
+```
+The function returns an equation in the form of y=a+bx, which is to compare this method with other advanced machine learning methods more intuitively.
+
+## Introduction about _Stochastic_GD_
+The source R code is as follows:
+```{r}
+Stochastic_GD<-function(x,y,learning_rate){
+  x0=rep(1,length(x))
+  x_data=cbind(x0,x)
+  y_data=matrix(y,length(y),1)
+  theta=matrix(c(1,1),2,1)
+  i=sample(1:nrow(x_data),1)
+  diff=x_data[i,]%*%theta-y_data[i,]
+  gradient=(x_data[i,])%*%diff
+  while (!((abs(gradient[1,1])<1e-5)&(abs(gradient[2,1])<1e-5))){
+    theta=theta-learning_rate*gradient
+    j=sample(1:nrow(x_data),1)
+    diff=x_data[j,]%*%theta-y_data[j,]
+    gradient=(x_data[j,])%*%diff
+  }
+  func=paste('y=',theta[1,1],'+',theta[2,1],'x')
+  return (func)
+}
+```
+The output form of this function is as the same as that of the previous equation, which can visually compare the output results and the running time to choose a more suitable method.
+
+

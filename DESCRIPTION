@@ -1,0 +1,17 @@
+Package: StatComp20047
+Type: Package
+Title: 20047 Final Homework
+Version: 1.0
+Date: 2020-12-15
+Author: 20047
+Maintainer: Jianyu Liu <liu06@mail.ustc.edu.cn>
+Description:The package contains the statistical computing homework,as well as two algorithms in deep learning.
+License: GPL (>= 2)
+Imports: Rcpp (>= 1.0.5),knitr,rmarkdown,ggplot2,MASS,bootstrap,boot,DAAG,RANN,Ball,energy
+Suggests:microbenchmark
+LinkingTo: Rcpp
+RoxygenNote:7.1.1
+Encoding:UTF-8
+VignetteBuilder:knitr
+URL:http://github.com/Statistics-Liu/StatComp20047
+BugReports:http://github.com/Statistics-Liu/StatComp20047/issues
