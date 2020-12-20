@@ -1365,7 +1365,7 @@ Write an  Rcpp function for Exercise 9.4 (page 277, Statistical Computing with R
      return(list(x = x, k = k))
     }
     
-    sourceCpp("C:/hw/StatComp20047/src/rwMetropolis.cpp")
+    sourceCpp("../src/rwMetropolis.cpp")
     x0 = 25
     N = 2000
     sigma = 2
